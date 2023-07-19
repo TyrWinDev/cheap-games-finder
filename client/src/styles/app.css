@@ -1,0 +1,13 @@
+/* body {
+
+} */
+
+.main-app__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1rem;
+    padding: 1rem;
+}

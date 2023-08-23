@@ -88,12 +88,12 @@ export const fetchGameScreenshots = async (gameID) => {
 
 
 // // Function to fetch trending deals
-// export const fetchTrendingDeals = async () => {
-//   try {
-//     const response = await axios.get(`${gameApiURL}/api/trending-deals`);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error fetching trending deals:', error);
-//     return null;
-//   }
-// };
+export const fetchTrendingDeals = async () => {
+  try {
+    const response = await axios.get(`${gameApiURL}/api/trending-deals`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching trending deals:', error);
+    return null;
+  }
+};

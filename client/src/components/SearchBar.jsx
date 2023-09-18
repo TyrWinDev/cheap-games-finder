@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import '../styles/searchBar.css';
+import '../styles/searchBar.scss';
 
 const SearchBar = ({ handleSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -21,6 +21,7 @@ const SearchBar = ({ handleSearch }) => {
           type="text"
           value={searchQuery}
           onChange={handleInputChange}
+          placeholder='Search for a game...'
         />
         <button type="submit">Search</button>
       </form>

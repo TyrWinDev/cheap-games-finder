@@ -3,9 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 import { fetchGameDetails } from '../api/api';
 import YouTubeVideo from './YoutubeVideo';
 
-import '../styles/gameDetails.css';
+import '../styles/gameDetails.scss';
+import '../styles/app.scss'
 
-const GameDetails = () => {
+const GameDetails = ({loading}) => {
   const { id } = useParams();
   const [gameDetails, setGameDetails] = useState(null);
 
@@ -25,8 +26,11 @@ const GameDetails = () => {
     fetchDetails();
   }, [id]);
 
-  if (!gameDetails) {
-    return <div>Loading...</div>;
+  if (!gameDetails && !loading) {
+    return <div>
+      <h2>ERROR 404. Game has no details available...</h2>
+      <Link to={`/`}>Go Back...</Link>
+    </div>;
   }
 
   const {

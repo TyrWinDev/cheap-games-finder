@@ -1,0 +1,48 @@
+$primary-background-color: #1d1d1d;
+$primary-text-color: #fff;
+$heading-font-size: 2rem;
+$font-family-title: 'Roboto', sans-serif;
+$font-family-body: 'Archivo', sans-serif;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+$font-style: normal; 
+$font-style-italic: italic;
+
+
+body {
+  background-color: $primary-background-color;
+
+  h1, h2, h3, h4, span, p {
+    color: $primary-text-color;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: $font-family-title;
+    font-weight: $font-weight-bold;
+    font-style: $font-style;
+  }
+
+  h1 {
+    font-size: $heading-font-size;
+    text-align: center;
+  }
+
+  span, p {
+    font-family: $font-family-body;
+    font-weight: $font-weight-regular;
+    font-style: $font-style;
+  }
+}
+
+
+
+.main-app__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1rem;
+    padding: 1rem;
+}

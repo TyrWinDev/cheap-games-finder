@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { TailSpin } from "react-loader-spinner";
+import { AiOutlineClockCircle, AiFillStar } from "react-icons/ai";
 
 import "../styles/gameList.scss";
 import "../styles/app.scss";
@@ -8,19 +9,18 @@ import "../styles/app.scss";
 const GameList = ({ games, loading }) => {
   // Filter games with cheapest price
   const filteredGames = games
-  .filter(
-    (game) =>
-      (game.cheapest && game.metacritic) || !game.cheapest || !game.metacritic
-  )
-  .sort((a, b) => {
-    // Convert release dates to ISO 8601 format for comparison
-    const dateA = new Date(a.released.split("T")[0]);
-    const dateB = new Date(b.released.split("T")[0]);
+    .filter(
+      (game) =>
+        (game.cheapest && game.metacritic) || !game.cheapest || !game.metacritic
+    )
+    .sort((a, b) => {
+      // Convert release dates to ISO 8601 format for comparison
+      const dateA = new Date(a.released.split("T")[0]);
+      const dateB = new Date(b.released.split("T")[0]);
 
-    // Sort in descending order (most recent first)
-    return dateB - dateA;
-  });
-
+      // Sort in descending order (most recent first)
+      return dateB - dateA;
+    });
 
   // Get rating based on metacritic score
   const getRating = (metacritic) => {
@@ -78,7 +78,7 @@ const GameList = ({ games, loading }) => {
 
   return (
     <div>
-      {loading ? ( 
+      {loading ? (
         <div className="loader-container">
           <TailSpin color="#00BFFF" height={80} width={80} />
         </div>
@@ -90,7 +90,6 @@ const GameList = ({ games, loading }) => {
 
             return (
               <div className="game-list__game-container" key={game.id}>
-
                 <div className="game-list__image-container">
                   <img
                     className="game-list__image"
@@ -119,26 +118,27 @@ const GameList = ({ games, loading }) => {
                   </div>
                   <div className="game-list__genres">
                     {game.genres.map((genre) => (
-                      <span id="game-list-genre" key={genre.id}>
+                      <span id="game-list__genre" key={genre.id}>
                         {genre.name}
                       </span>
                     ))}
                   </div>
                   <div className="game-list__playtime-rating">
-                    <span id="game-list__released">{game.released}</span>
+                    <span id="game-list__released">Release date: {game.released}</span>
                     {game.playtime !== 0 && (
                       <h4 id="game-list__playtime">
-                        {`Average Playtime: ${game.playtime} hours`}
+                       <AiOutlineClockCircle /> {`Average Playtime: ${game.playtime} hours`}
                       </h4>
                     )}
                   </div>
                   <div className="game-list__description">
                     <p>
-                      {game.description.length > 150
-                        ? game.description.slice(0, 300) + "..."
+                      {game.description.length > 120
+                        ? game.description.slice(0, 120) + "..."
                         : game.description}
+                         <Link to={`/game/${game.id}`}>... learn More</Link>
                     </p>
-                    <Link to={`/game/${game.id}`}>Learn More...</Link>
+                   
                   </div>
                 </div>
 
@@ -154,9 +154,9 @@ const GameList = ({ games, loading }) => {
                     </span>
                   </div>
                   <div className="game-list__button-container">
-                      <button className="game-list__button">
-                        Add to Wishlist
-                      </button>
+                    <button className="game-list__button">
+                    <AiFillStar /> Add to Wishlist
+                    </button>
                   </div>
                 </div>
               </div>

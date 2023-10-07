@@ -1,5 +1,6 @@
 @import "app.scss";
 
+
 .game-list__container {
   display: flex;
   flex-direction: row;
@@ -18,12 +19,12 @@
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-  padding-left: 0;
-  padding-top: 1.2rem;
-  border-radius: 1rem;
-  border: 3px solid $primary-text-color;
-  background-color: var(--color-primary);
+  border-radius: 24px;
+  background-color: $game-container-bg-color;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+  min-width: 861px;
+  height: 225px;
 }
 
 .game-list__image-container {
@@ -40,8 +41,9 @@
 
 .game-list__title-container {
   #game-list__title {
-    margin-top: 0;
-    margin-bottom: 0.25em;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -53,16 +55,46 @@
   :first-child {
     margin-left: 0;
   }
+  margin-bottom: 1em;;
 }
 
 .game-list__platform {
-  border: 1px solid red;
-  border-radius: 0rem 0.25rem;
-  padding: 0 0.25rem;
+  border: 1px solid $primary-background-color;
+  background-color: $primary-text-color;
+  color: $primary-background-color;
+  border-radius: 8px;
+  padding: 0.2em 0.3rem;
   margin: 0 0.25rem;
 
   font-weight: 400;
   font-size: 0.75rem;
+}
+
+.game-list__genres {
+  #game-list__genre {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+}
+
+.game-list__playtime-rating {
+
+  #game-list__released{
+    font-size: 0.8em;
+    font-style: italic;
+  }
+
+  #game-list__playtime {
+    display: flex ;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 5px;
+
+    background-color: $primary-text-color;
+    color: $primary-background-color;
+  }
 }
 
 .game-list__actions-container {
@@ -133,20 +165,20 @@
     margin-top: 2rem;
 
     .game-list__button {
-      padding: 1rem;
+      padding: 0.85rem;
       border-radius: 12px;
-      font-size: 1rem;
+      font-size: 0.8rem;
       font-weight: bold;
-      width: 10rem;
-      background: #ffffff;
+      width: 100%;
+      background-color: $button-bg-color;
+      color: $button-text-color;
       cursor: pointer;
     }
 
     .game-list__button:hover {
-      color: $primary-text-color;
-      background-color: $primary-background-color;
+      color: $button-bg-color;
+      background-color: $button-text-color;
       transition: 0.2s ease-in-out;
-      border: 1px solid $primary-text-color;
     }
   }
 }
@@ -157,3 +189,21 @@
   align-items: center;
   height: 100%;
 }
+
+
+  // Media Queries
+  @media (max-width: $mobile) {
+    // Styles for mobile devices
+  }
+
+  @media (min-width: $tablet) {
+    // Styles for tablet devices
+  }
+
+  @media (min-width: $desktop) {
+    // Styles for desktop devices
+  }
+
+  @media (min-width: $large-desktop) {
+    // Styles for large desktop devices
+  }

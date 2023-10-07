@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { fetchGameDetails } from '../api/api';
 import YouTubeVideo from './YoutubeVideo';
 
+
 import '../styles/gameDetails.scss';
 import '../styles/app.scss'
 
@@ -57,38 +58,49 @@ const GameDetails = ({loading}) => {
   const cheapSharkDealURL = `https://www.cheapshark.com/redirect?dealID=${cheapestDealID}`;
 
   return (
-    <div className='game-details__container'>
+    <main className='game-details__container'>
       <h1>Game Details</h1>
 
-      <div className='game-details__game-container'>
-        <div className="game-details__image-container">
+      <header className='game-details__game-container'>
+        <figure className="game-details__image-container">
           <img
             className="game-details__image"
             src={background_image}
             alt="Game Cover"
           />
-        </div>
+        </figure>
 
 
 
-        <div className="game-details__details-container">
+        <section className="game-details__details-container">
           <div className="game-details__title-container">
             <h2>{name}</h2>
           </div>
           <div className="game-details__info-container">
-            <span>Publishers: {publishers[0]?.name}</span>
-            <span>Developers: {developers[0]?.name}</span>
-            <span>ESRB Rating: {esrb_rating?.name}</span>
-            <span>Genres: {genres?.map((genre) => genre.name).join(', ')}</span>
-            <span>Metacritic Score: {metacritic}</span>
-            <span>Playtime: {playtime} hours</span>
-            <span>Rating: {rating}</span>
-            <span>Released: {released}</span>
-            <span>
-              Platforms:{' '}
-              {platforms?.map((platform) => platform.platform.name).join(', ')}
-            </span>
+            <span>{publishers[0]?.name}</span>
+            {" / "}
+            <span>{released}</span>
+            {" / "}
+            <span>{esrb_rating?.name}</span>
+            {" / "}
+            <span>{genres[0]?.name}</span>
           </div>
+
+          <div className="game-details__platforms-container">
+          {platforms?.map((platform) => (
+            <span
+              className="game-details__platforms"
+              key={platform.platform.id}
+            >
+              <i>{platform.platform.name}</i>
+            </span>
+          ))}
+          </div>
+
+          {/* USE FOR NEW DIV  */}
+          {/* <span>Metacritic Score: {metacritic}</span>
+            <span>Playtime: {playtime} hours</span>
+            <span>Rating: {rating}</span> */}
 
           <div className="game-details__price-container">
           <span>Cheapest Price: {cheapest}</span>
@@ -96,23 +108,23 @@ const GameDetails = ({loading}) => {
             <h3>Buy Now</h3>
           </Link>
         </div>
-        </div>
-      </div>
+        </section>
+      </header>
 
-      <div className="game-details__description-container">
+      <section className="game-details__description-container">
         <div className="game-details__description-title">
           <h3>Description</h3>
         </div>
-        <div className="game-details__description">
+        <article className="game-details__description">
           <p>{description_raw !== "" ? description_raw : description}</p>
-        </div>
-      </div>
+        </article>
+      </section>
 
       <div className="game-details__tags-container">
         <span>Tags: {tags?.map((tag) => tag.name).join(', ')}</span>
       </div>
 
-      <div className="game-details__videos-container">
+      <section className="game-details__videos-container">
         <div className="game-details__trailers-container">
           {trailers && (
             <div>
@@ -136,9 +148,9 @@ const GameDetails = ({loading}) => {
             </div>
           )}
         </div>
-      </div>
+      </section>
 
-      <div className="game-details__screenshots-container">
+      <section className="game-details__screenshots-container">
         <h3>Screenshots</h3>
         <div className="game-details__screenshots">
           {screenshots?.results.map((screenshot) => (
@@ -149,12 +161,12 @@ const GameDetails = ({loading}) => {
             />
           ))}
         </div>
-      </div>
+      </section>
 
       <div className="game-details__link-container">
         <Link to={`/`}>Go Back...</Link>
       </div>
-    </div>
+    </main>
   );
 };
 

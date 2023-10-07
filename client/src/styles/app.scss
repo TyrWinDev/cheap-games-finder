@@ -1,6 +1,15 @@
+// Main Colors 
 $primary-background-color: #1d1d1d;
+$main-bg-color: #202634;
 $primary-text-color: #fff;
+$game-container-bg-color: #283044;
+
+// Fonts Sizes
 $heading-font-size: 2rem;
+$sub-info-font-size: 0.8rem;
+$description-font-size: 1rem;
+
+// Fonts Styling
 $font-family-title: 'Roboto', sans-serif;
 $font-family-body: 'Archivo', sans-serif;
 $font-weight-light: 300;
@@ -9,9 +18,22 @@ $font-weight-bold: 700;
 $font-style: normal; 
 $font-style-italic: italic;
 
+//Margins nnd Padding
+$title-mb: 0.25rem;
+
+// Button 
+$button-bg-color: #fff;
+$button-text-color: #1d1d1d;
+
+// Media Queries
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$large-desktop: 1200px;
+
 
 body {
-  background-color: $primary-background-color;
+  background-color: $main-bg-color;
 
   h1, h2, h3, h4, span, p {
     color: $primary-text-color;

@@ -14,12 +14,10 @@ const GameList = ({ games, loading }) => {
         (game.cheapest && game.metacritic) || !game.cheapest || !game.metacritic
     )
     .sort((a, b) => {
-      // Convert release dates to ISO 8601 format for comparison
-      const dateA = new Date(a.released.split("T")[0]);
-      const dateB = new Date(b.released.split("T")[0]);
+      const ratingA = a.metacritic;
+      const ratingB = b.metacritic;
 
-      // Sort in descending order (most recent first)
-      return dateB - dateA;
+      return ratingB - ratingA;
     });
 
   // Get rating based on metacritic score
@@ -122,12 +120,19 @@ const GameList = ({ games, loading }) => {
                       </span>
                     ))}
                   </div>
-                  <div className="game-list__genres">
-                    {game.genres.map((genre) => (
-                      <span id="game-list__genre" key={genre.id}>
-                        {genre.name}
+                  <div className="game-list__released-&-genres">
+                    <div className="game-list__released">
+                      <span id="game-list__released">
+                        Release date: {game.released}
                       </span>
-                    ))}
+                    </div>
+                    <div className="game-list__genres">
+                      {game.genres.map((genre) => (
+                        <span id="game-list__genre" key={genre.id}>
+                          {genre.name}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                   {/* <div className="game-list__playtime-rating">
                     <span id="game-list__released">
@@ -152,12 +157,16 @@ const GameList = ({ games, loading }) => {
 
                 <div className="game-list__actions-container">
                   <div className="game-list__button-container">
-                    <button className="game-list__button" disabled={!game.cheapest}>
-                      <Link
-                        to={`/game/${game.id}`}
-                        target="_blank"
-                      >
-                        <h3>{!game.cheapest ? "No offers available..." : `Get this game for $${game.cheapest}`}</h3>
+                    <button
+                      className="game-list__button"
+                      disabled={!game.cheapest}
+                    >
+                      <Link to={`/game/${game.id}`} target="_blank">
+                        <h3>
+                          {!game.cheapest
+                            ? "No offers available..."
+                            : `Get this game for $${game.cheapest}`}
+                        </h3>
                         {/* <span id="game-list__price">{`Cheapest Price: ${
                           !game.cheapest ? "N/A" : `$${game.cheapest}`
                         }`}</span> */}

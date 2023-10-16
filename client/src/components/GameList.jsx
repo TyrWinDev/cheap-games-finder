@@ -9,16 +9,25 @@ import "../styles/app.scss";
 const GameList = ({ games, loading }) => {
   // Filter games with cheapest price
   const filteredGames = games
-    .filter(
-      (game) =>
-        (game.cheapest && game.metacritic) || !game.cheapest || !game.metacritic
-    )
-    .sort((a, b) => {
-      const ratingA = a.metacritic;
-      const ratingB = b.metacritic;
+  .filter(
+    (game) =>
+      (game.cheapest && game.metacritic) || !game.cheapest || !game.metacritic
+  )
+  .sort((a, b) => {
+    const ratingA = a.metacritic;
+    const ratingB = b.metacritic;
 
-      return ratingB - ratingA;
-    });
+    // Check if both games have a price, if not, prioritize the one with a price.
+    if (!a.cheapest && b.cheapest) {
+      return 1;
+    } else if (a.cheapest && !b.cheapest) {
+      return -1;
+    }
+
+    // If both have a price or neither have a price, sort by metacritic rating.
+    return ratingB - ratingA;
+  });
+
 
   // Get rating based on metacritic score
   const getRating = (metacritic) => {

@@ -369,7 +369,9 @@
   }
 
   @media (min-width: $desktop) {
-    // Styles for desktop devices
+    .game-list__container .game-list__game-container {
+      width: 30%;
+    }
   }
 
   @media (min-width: $large-desktop) {

@@ -9,25 +9,24 @@ import "../styles/app.scss";
 const GameList = ({ games, loading }) => {
   // Filter games with cheapest price
   const filteredGames = games
-  .filter(
-    (game) =>
-      (game.cheapest && game.metacritic) || !game.cheapest || !game.metacritic
-  )
-  .sort((a, b) => {
-    const ratingA = a.metacritic;
-    const ratingB = b.metacritic;
+    .filter(
+      (game) =>
+        (game.cheapest && game.metacritic) || !game.cheapest || !game.metacritic
+    )
+    .sort((a, b) => {
+      const ratingA = a.metacritic;
+      const ratingB = b.metacritic;
 
-    // Check if both games have a price, if not, prioritize the one with a price.
-    if (!a.cheapest && b.cheapest) {
-      return 1;
-    } else if (a.cheapest && !b.cheapest) {
-      return -1;
-    }
+      // Check if both games have a price, if not, prioritize the one with a price.
+      if (!a.cheapest && b.cheapest) {
+        return 1;
+      } else if (a.cheapest && !b.cheapest) {
+        return -1;
+      }
 
-    // If both have a price or neither have a price, sort by metacritic rating.
-    return ratingB - ratingA;
-  });
-
+      // If both have a price or neither have a price, sort by metacritic rating.
+      return ratingB - ratingA;
+    });
 
   // Get rating based on metacritic score
   const getRating = (metacritic) => {
@@ -94,16 +93,17 @@ const GameList = ({ games, loading }) => {
           {filteredGames.map((game) => {
             const { metacritic } = game;
             const { rating, ratingClass } = getRating(metacritic);
-            const cheapSharkDealURL = `https://www.cheapshark.com/redirect?dealID=${game.cheapestDealID}`;
 
             return (
               <div className="game-list__game-container" key={game.id}>
                 <div className="game-list__image-container">
-                  <img
-                    className="game-list__image"
-                    src={game.background_image}
-                    alt={game.name}
-                  />
+                  <Link to={`/game/${game.id}`} target="_blank">
+                    <img
+                      className="game-list__image"
+                      src={game.background_image}
+                      alt={game.name}
+                    />
+                  </Link>
                 </div>
 
                 <div className="game-list__main-container">

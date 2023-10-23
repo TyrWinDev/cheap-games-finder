@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { fetchGameDetails } from '../api/api';
-import YouTubeVideo from './YoutubeVideo';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { fetchGameDetails } from "../api/api";
+import YouTubeVideo from "./YoutubeVideo";
+import "../styles/gameDetails.scss";
+import "../styles/app.scss";
+import ImgSlider from "./ImgSlider";
 
-
-import '../styles/gameDetails.scss';
-import '../styles/app.scss'
-
-const GameDetails = ({loading}) => {
+const GameDetails = ({ loading }) => {
   const { id } = useParams();
   const [gameDetails, setGameDetails] = useState(null);
+  const [activeTab, setActiveTab] = useState("trailer");
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -18,9 +18,9 @@ const GameDetails = ({loading}) => {
         if (details) {
           setGameDetails(details);
         }
-        console.log('Game details', details);
+        console.log("Game details", details);
       } catch (error) {
-        console.error('Error fetching game details', error);
+        console.error("Error fetching game details", error);
       }
     };
 
@@ -28,10 +28,12 @@ const GameDetails = ({loading}) => {
   }, [id]);
 
   if (!gameDetails && !loading) {
-    return <div>
-      <h2>ERROR 404. Game has no details available...</h2>
-      <Link to={`/`}>Go Back...</Link>
-    </div>;
+    return (
+      <div>
+        <h2>ERROR 404. Game has no details available...</h2>
+        <Link to={`/`}>Go Back...</Link>
+      </div>
+    );
   }
 
   const {
@@ -57,11 +59,15 @@ const GameDetails = ({loading}) => {
   } = gameDetails;
   const cheapSharkDealURL = `https://www.cheapshark.com/redirect?dealID=${cheapestDealID}`;
 
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
-    <main className='game-details__container'>
+    <main className="game-details__container">
       <h1>Game Details</h1>
 
-      <header className='game-details__game-container'>
+      <header className="game-details__game-container">
         <figure className="game-details__image-container">
           <img
             className="game-details__image"
@@ -69,8 +75,6 @@ const GameDetails = ({loading}) => {
             alt="Game Cover"
           />
         </figure>
-
-
 
         <section className="game-details__details-container">
           <div className="game-details__title-container">
@@ -87,14 +91,14 @@ const GameDetails = ({loading}) => {
           </div>
 
           <div className="game-details__platforms-container">
-          {platforms?.map((platform) => (
-            <span
-              className="game-details__platforms"
-              key={platform.platform.id}
-            >
-              <i>{platform.platform.name}</i>
-            </span>
-          ))}
+            {platforms?.map((platform) => (
+              <span
+                className="game-details__platforms"
+                key={platform.platform.id}
+              >
+                <i>{platform.platform.name}</i>
+              </span>
+            ))}
           </div>
 
           {/* USE FOR NEW DIV  */}
@@ -103,11 +107,16 @@ const GameDetails = ({loading}) => {
             <span>Rating: {rating}</span> */}
 
           <div className="game-details__price-container">
-          <span>Cheapest Price: {cheapest}</span>
-          <Link to={cheapSharkDealURL} target="_blank" rel="noopener noreferrer">
-            <h3>Buy Now</h3>
-          </Link>
-        </div>
+            <button className="game-list__button">
+              <Link
+                to={cheapSharkDealURL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h3>Buy Now for: ${cheapest}</h3>
+              </Link>
+            </button>
+          </div>
         </section>
       </header>
 
@@ -120,47 +129,67 @@ const GameDetails = ({loading}) => {
         </article>
       </section>
 
-      <div className="game-details__tags-container">
-        <span>Tags: {tags?.map((tag) => tag.name).join(', ')}</span>
-      </div>
+      {/* <div className="game-details__tags-container">
+        <span>Tags: {tags?.map((tag) => tag.name).join(", ")}</span>
+      </div> */}
 
       <section className="game-details__videos-container">
-        <div className="game-details__trailers-container">
-          {trailers && (
-            <div>
-              <h3>Trailer</h3>
+        <div className="game-details__tabs-container">
+          <div
+            className={`game-details__tab ${
+              activeTab === "trailer" ? "active" : ""
+            }`}
+            onClick={() => handleTabClick("trailer")}
+          >
+            Trailer
+          </div>
+          <div
+            className={`game-details__tab ${
+              activeTab === "review" ? "active" : ""
+            }`}
+            onClick={() => handleTabClick("review")}
+          >
+            Review
+          </div>
+        </div>
+
+        <div className="game-details__video-container">
+          {activeTab === "trailer" && trailers && (
+            <>
               <YouTubeVideo
                 key={trailers.videoId}
                 videoId={trailers.id.videoId}
               />
-            </div>
+              <div>
+                <span>
+                  Done with the Trailer? How about watching a review now!
+                </span>
+                <button onClick={() => handleTabClick("review")}>Review</button>
+              </div>
+            </>
           )}
-        </div>
-
-        <div className="game-details__reviews-container">
-          {reviews && (
-            <div>
-              <h3>Review</h3>
+          {activeTab === "review" && reviews && (
+            <>
               <YouTubeVideo
                 key={reviews.videoId}
                 videoId={reviews.id.videoId}
               />
-            </div>
+              <div>
+                <span>
+                  Done with the Review? How about watching a trailer now!
+                </span>
+                <button onClick={() => handleTabClick("trailer")}>
+                  Trailer
+                </button>
+              </div>
+            </>
           )}
         </div>
       </section>
 
       <section className="game-details__screenshots-container">
         <h3>Screenshots</h3>
-        <div className="game-details__screenshots">
-          {screenshots?.results.map((screenshot) => (
-            <img
-              key={screenshot.id}
-              src={screenshot.image}
-              alt={`${name} Screenshot`}
-            />
-          ))}
-        </div>
+        <ImgSlider screenshots={screenshots} name={name} />
       </section>
 
       <div className="game-details__link-container">

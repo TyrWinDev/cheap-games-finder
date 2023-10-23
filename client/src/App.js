@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { fetchVideoGame } from "./api/api";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Navbar from "./components/Navbar";
+import SearchBar from "./components/SearchBar";
 import GameList from "./components/GameList";
 import GameDetails from "./components/GameDetails";
 import TrendingGames from "./components/TrendingGames";
@@ -10,15 +12,16 @@ import { gameApiURL } from "./api/api";
 
 
 import "./styles/app.scss";
-import Navbar from "./components/Navbar";
 
 const App = () => {
   const [gameList, setGameList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = async (searchQuery) => {
     try {
       setLoading(true); //Sets loading to true while the petition is being handled.
+      setSearchQuery(searchQuery); //Sets the search query to the one that was passed as an argument.
 
       // Search for the game using the search query
       const gameData = await fetchVideoGame(searchQuery);
@@ -67,13 +70,26 @@ const App = () => {
     }
   };
 
+  console.log(gameList, "gameList")
+
   return (
     <Router>
       <div>
-      <Navbar handleSearch={handleSearch}/>
+      {/* <Navbar handleSearch={handleSearch}/> */}
       <div className="main-app__container">
-        <h1 className="page-title">Video Game Deals</h1>
-        <span className="page-subtitle">(Never pay full price again...)</span>
+        <h1 className="page-title">{gameList.length > 0 ? `Showing game results for: ${searchQuery}` : `Video Game Deals`}</h1>
+
+        {/* {gameList.length === 0 && !loading && (
+          <>
+          <span className="page-subtitle">(Never pay full price again...)</span>
+
+            <SearchBar handleSearch={handleSearch}/>
+          </>
+        )}
+
+        {gameList.length > 0 && (
+           <button className="main-app__clear-btn" onClick={() => setGameList([])}> Clear Results </button>
+        )} */}
         <Routes>
          <Route path="/" element={<GameList games={gameList} loading={loading} />} />
           {/* <Route path='/trending-deals' element={<TrendingGames />} /> */}

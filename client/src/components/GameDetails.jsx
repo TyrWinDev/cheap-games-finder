@@ -135,22 +135,25 @@ const GameDetails = ({ loading }) => {
 
       <section className="game-details__videos-container">
         <div className="game-details__tabs-container">
-          <div
-            className={`game-details__tab ${
-              activeTab === "trailer" ? "active" : ""
-            }`}
-            onClick={() => handleTabClick("trailer")}
-          >
-            Trailer
-          </div>
-          <div
-            className={`game-details__tab ${
-              activeTab === "review" ? "active" : ""
-            }`}
-            onClick={() => handleTabClick("review")}
-          >
-            Review
-          </div>
+        {activeTab === "trailer" && trailers ? (
+  <div
+    className={`game-details__tab ${
+      activeTab === "trailer" ? "active" : ""
+    }`}
+    onClick={() => handleTabClick("trailer")}
+  >
+    Trailer
+  </div>
+) : (
+  <div
+    className={`game-details__tab ${
+      activeTab === "review" ? "active" : ""
+    }`}
+    onClick={() => handleTabClick("review")}
+  >
+    Review
+  </div>
+)}
         </div>
 
         <div className="game-details__video-container">

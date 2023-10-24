@@ -48,58 +48,57 @@
     margin-bottom: 0.5rem;
   }
   width: 100%;
+}
 
+.game-list__rating {
+  margin-left: 0;
+  padding: 0.8rem;
+  border-radius: 12px;
 
-  .game-list__rating {
-    margin-left: 0;
-    padding: 0.8rem;
-    border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
 
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
+.game-list__rating.default {
+  background: #1d1d1d;
+  color: #fff;
+}
 
-  .game-list__rating.default {
-    background: #1d1d1d;
-    color: #fff;
-  }
+.game-list__rating.gutter-trash {
+  background: #404140 !important;
+  color: $primary-text-color !important;
+}
 
-  .game-list__rating.gutter-trash {
-    background: #404140 !important;
-    color: $primary-text-color !important;
-  }
+.game-list__rating.terrible,
+.game-list__rating.utterly-bad {
+  background: #c50010 !important;
+  color: $primary-text-color !important;
+}
 
-  .game-list__rating.terrible,
-  .game-list__rating.utterly-bad {
-    background: #c50010 !important;
-    color: $primary-text-color !important;
-  }
+.game-list__rating.quite-disappointing,
+.game-list__rating.below-average {
+  background: #fc9803 !important;
+  color: $primary-text-color !important;
+}
 
-  .game-list__rating.quite-disappointing,
-  .game-list__rating.below-average {
-    background: #fc9803 !important;
-    color: $primary-text-color !important;
-  }
+.game-list__rating.average {
+  background: #ebd300 !important;
+}
 
-  .game-list__rating.average {
-    background: #ebd300 !important;
-  }
+.game-list__rating.quite-decent {
+  background: #8fcc02 !important;
+}
 
-  .game-list__rating.quite-decent {
-    background: #8fcc02 !important;
-  }
+.game-list__rating.pretty-good {
+  background: #00c50a !important;
+}
 
-  .game-list__rating.pretty-good {
-    background: #00c50a !important;
-  }
+.game-list__rating.awesomesauce {
+  background: #9700c5 !important;
+}
 
-  .game-list__rating.awesomesauce {
-    background: #9700c5 !important;
-  }
-
-  .game-list__rating.masterpiece {
-    background: #00abee !important;
-  }
+.game-list__rating.masterpiece {
+  background: #00abee !important;
 }
 
 .game-list__price-container {

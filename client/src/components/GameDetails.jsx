@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchGameDetails } from "../api/api";
+import { getRating } from "../utils/utils";
 import YouTubeVideo from "./YoutubeVideo";
 import "../styles/gameDetails.scss";
 import "../styles/app.scss";
@@ -50,7 +51,6 @@ const GameDetails = ({ loading }) => {
     platforms,
     playtime,
     publishers,
-    rating,
     released,
     reviews,
     screenshots,
@@ -58,6 +58,8 @@ const GameDetails = ({ loading }) => {
     trailers,
   } = gameDetails;
   const cheapSharkDealURL = `https://www.cheapshark.com/redirect?dealID=${cheapestDealID}`;
+
+  const { rating, ratingClass } = getRating(metacritic);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -79,6 +81,12 @@ const GameDetails = ({ loading }) => {
         <section className="game-details__details-container">
           <div className="game-details__title-container">
             <h2>{name}</h2>
+          </div>
+          <div className={`game-list__rating-container`}>
+            <span className={`game-list__rating ${ratingClass}`}>
+              {!metacritic ? "N/A" : metacritic}
+            </span>
+            <h4 className="game-details__rating-text">{rating}</h4>
           </div>
           <div className="game-details__info-container">
             <span>{publishers[0]?.name}</span>
@@ -122,7 +130,7 @@ const GameDetails = ({ loading }) => {
 
       <section className="game-details__description-container">
         <div className="game-details__description-title">
-          <h3>Description</h3>
+          <h3 className="mt-0">Description</h3>
         </div>
         <article className="game-details__description">
           <p>{description_raw !== "" ? description_raw : description}</p>
@@ -135,25 +143,25 @@ const GameDetails = ({ loading }) => {
 
       <section className="game-details__videos-container">
         <div className="game-details__tabs-container">
-        {activeTab === "trailer" && trailers ? (
-  <div
-    className={`game-details__tab ${
-      activeTab === "trailer" ? "active" : ""
-    }`}
-    onClick={() => handleTabClick("trailer")}
-  >
-    Trailer
-  </div>
-) : (
-  <div
-    className={`game-details__tab ${
-      activeTab === "review" ? "active" : ""
-    }`}
-    onClick={() => handleTabClick("review")}
-  >
-    Review
-  </div>
-)}
+          {activeTab === "trailer" && trailers ? (
+            <div
+              className={`game-details__tab ${
+                activeTab === "trailer" ? "active" : ""
+              }`}
+              onClick={() => handleTabClick("trailer")}
+            >
+              <h3 className="mt-0">Trailer</h3>
+            </div>
+          ) : (
+            <div
+              className={`game-details__tab ${
+                activeTab === "review" ? "active" : ""
+              }`}
+              onClick={() => handleTabClick("review")}
+            >
+              <h3 className="mt-0">Review</h3>
+            </div>
+          )}
         </div>
 
         <div className="game-details__video-container">
@@ -163,11 +171,13 @@ const GameDetails = ({ loading }) => {
                 key={trailers.videoId}
                 videoId={trailers.id.videoId}
               />
-              <div>
-                <span>
-                  Done with the Trailer? How about watching a review now!
-                </span>
-                <button onClick={() => handleTabClick("review")}>Review</button>
+              <div className="game-list__video-container__button-container">
+                <button
+                  className="game-list__button"
+                  onClick={() => handleTabClick("review")}
+                >
+                  Done watching? Watch a Review next!
+                </button>
               </div>
             </>
           )}
@@ -177,12 +187,12 @@ const GameDetails = ({ loading }) => {
                 key={reviews.videoId}
                 videoId={reviews.id.videoId}
               />
-              <div>
-                <span>
-                  Done with the Review? How about watching a trailer now!
-                </span>
-                <button onClick={() => handleTabClick("trailer")}>
-                  Trailer
+              <div className="game-list__video-container__button-container">
+                <button
+                  className="game-list__button"
+                  onClick={() => handleTabClick("trailer")}
+                >
+                  Done watching? Watch a Trailer next!
                 </button>
               </div>
             </>
@@ -191,12 +201,14 @@ const GameDetails = ({ loading }) => {
       </section>
 
       <section className="game-details__screenshots-container">
-        <h3>Screenshots</h3>
+        <h3 className="mt-0">Screenshots</h3>
         <ImgSlider screenshots={screenshots} name={name} />
       </section>
 
       <div className="game-details__link-container">
-        <Link to={`/`}>Go Back...</Link>
+        <button className="game-list__button">
+          <Link to={`/`}>Go Back...</Link>
+        </button>
       </div>
     </main>
   );

@@ -18,8 +18,8 @@ $font-weight-bold: 700;
 $font-style: normal; 
 $font-style-italic: italic;
 
-//Margins nnd Padding
-$title-mb: 0.25rem;
+//Margins and Padding
+$title-mb: 0.25rem 0;
 
 // Button 
 $button-bg-color: #fff;
@@ -68,4 +68,8 @@ body {
 
     margin: 1rem;
     padding: 1rem;
+}
+
+.mt-0 {
+    margin-top: 0 !important;
 }

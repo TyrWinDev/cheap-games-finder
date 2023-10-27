@@ -8,6 +8,7 @@ import "../styles/gameList.scss";
 import "../styles/app.scss";
 
 const GameList = ({ games, loading }) => {
+  const sortedGames = filteredGames(games);
 
   return (
     <div>
@@ -17,7 +18,7 @@ const GameList = ({ games, loading }) => {
         </div>
       ) : (
         <div className="game-list__container">
-          {filteredGames.map((game) => {
+          {sortedGames.map((game) => {
             const { metacritic } = game;
             const { rating, ratingClass } = getRating(metacritic);
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Router } from "react-router-dom";
 import { fetchGameDetails } from "../api/api";
 import { getRating } from "../utils/utils";
 import YouTubeVideo from "./YoutubeVideo";

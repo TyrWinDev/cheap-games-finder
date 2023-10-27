@@ -105,6 +105,10 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 
+.game-details__link-container {
+  width: 50%;
+}
+
 // Media Queries
 @media (max-width: $mobile) {
   .game-details__game-container {
@@ -343,7 +347,49 @@
 }
 
 @media (min-width: $desktop) {
-  // Styles for desktop devices
+  
+  .game-details__container {
+    width: 75%;
+  }
+
+  .game-details__game-container  {
+    justify-content: flex-start;
+    width: 100%;
+
+    .game-details__image-container  {
+      width: 30%;
+    }
+
+    .game-details__details-container {
+      .game-details__title-container h2 {
+        font-size: 1.8rem;
+      }
+
+      .game-details__price-container {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  .game-details__videos-container .game-details__video-container iframe  {
+    height: 540px !important;
+    width: 960px !important;
+  }
+
+  .game-details__screenshots-container {
+
+  .game-details__screenshots {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .carousel-root {
+      width: 960px !important;
+    }
+  }
+}
+
+
 }
 
 @media (min-width: $large-desktop) {

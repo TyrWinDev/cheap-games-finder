@@ -1,4 +1,4 @@
-// Main Colors 
+// Main Colors
 $primary-background-color: #1d1d1d;
 $main-bg-color: #202634;
 $primary-text-color: #fff;
@@ -10,18 +10,18 @@ $sub-info-font-size: 0.8rem;
 $description-font-size: 1rem;
 
 // Fonts Styling
-$font-family-title: 'Roboto', sans-serif;
-$font-family-body: 'Archivo', sans-serif;
+$font-family-title: "Roboto", sans-serif;
+$font-family-body: "Archivo", sans-serif;
 $font-weight-light: 300;
 $font-weight-regular: 400;
 $font-weight-bold: 700;
-$font-style: normal; 
+$font-style: normal;
 $font-style-italic: italic;
 
 //Margins and Padding
 $title-mb: 0.25rem 0;
 
-// Button 
+// Button
 $button-bg-color: #fff;
 $button-text-color: #1d1d1d;
 $button-click-positive: #6dc849;
@@ -32,15 +32,22 @@ $tablet: 768px;
 $desktop: 1024px;
 $large-desktop: 1200px;
 
-
 body {
   background-color: $main-bg-color;
 
-  h1, h2, h3, h4, span, p {
+  h1,
+  h2,
+  h3,
+  h4,
+  span,
+  p {
     color: $primary-text-color;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: $font-family-title;
     font-weight: $font-weight-bold;
     font-style: $font-style;
@@ -51,25 +58,63 @@ body {
     text-align: center;
   }
 
-  span, p {
+  span,
+  p {
     font-family: $font-family-body;
     font-weight: $font-weight-regular;
     font-style: $font-style;
   }
 }
 
-
-
 .main-app__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    margin: 1rem;
-    padding: 1rem;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 .mt-0 {
-    margin-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.main-app__clear-btn {
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  width: 30%;
+  height: 51px;
+  background-color: $primary-text-color;
+  color: #1d1d1d;
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+  }
+  a h3,
+  a span {
+    color: $button-text-color !important;
+  }
+
+  &:hover {
+    color: $button-bg-color;
+    background-color: $button-text-color;
+    transition: 0.2s ease-in-out;
+
+    a h3,
+    a span {
+      color: $button-bg-color !important;
+    }
+  }
+
+  &:active {
+    &:active {
+      transform: scale(0.95); /* add scale transform */
+      color: $button-bg-color;
+      background-color: $button-click-positive;
+      transition: 0.2s ease-in-out;
+    }
+  }
 }

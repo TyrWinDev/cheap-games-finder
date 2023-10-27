@@ -75,11 +75,11 @@ const App = () => {
   return (
     <Router>
       <div>
-      {/* <Navbar handleSearch={handleSearch}/> */}
+      <Navbar handleSearch={handleSearch}/>
       <div className="main-app__container">
         <h1 className="page-title">{gameList.length > 0 ? `Showing game results for: ${searchQuery}` : `Video Game Deals`}</h1>
 
-        {/* {gameList.length === 0 && !loading && (
+        {gameList.length === 0 && !loading && (
           <>
           <span className="page-subtitle">(Never pay full price again...)</span>
 
@@ -89,7 +89,7 @@ const App = () => {
 
         {gameList.length > 0 && (
            <button className="main-app__clear-btn" onClick={() => setGameList([])}> Clear Results </button>
-        )} */}
+        )}
         <Routes>
          <Route path="/" element={<GameList games={gameList} loading={loading} />} />
           {/* <Route path='/trending-deals' element={<TrendingGames />} /> */}

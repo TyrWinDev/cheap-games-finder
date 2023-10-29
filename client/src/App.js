@@ -81,7 +81,7 @@ const App = () => {
         </Routes>
       </div>
       <div id="wip-footer">
-      <span>This app is still a WIP. Created by: <a href="https://tyrwindev.github.io/digital-resume-v2.github.io/" target="_blank">@tyrwindev</a></span>
+      <span>This app is still a WIP. Created by: <a href="https://tyrwindev.github.io/digital-resume-v2.github.io/" target="_blank" rel="noreferrer">@tyrwindev</a></span>
       </div>
       </div>
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, Router } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { fetchGameDetails } from "../api/api";
 import { getRating } from "../utils/utils";
 import YouTubeVideo from "./YoutubeVideo";
@@ -7,7 +7,7 @@ import "../styles/gameDetails.scss";
 import "../styles/app.scss";
 import ImgSlider from "./ImgSlider";
 
-const GameDetails = ({ loading }) => {
+const GameDetails = ({ loading, setBackgroundImage }) => {
   const { id } = useParams();
   const [gameDetails, setGameDetails] = useState(null);
   const [activeTab, setActiveTab] = useState("trailer");
@@ -18,6 +18,9 @@ const GameDetails = ({ loading }) => {
         const details = await fetchGameDetails(id);
         if (details) {
           setGameDetails(details);
+          setBackgroundImage(
+            `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), #202634), url(${details.screenshots.results[0].image})`
+          );
         }
         console.log("Game details", details);
       } catch (error) {
@@ -26,7 +29,7 @@ const GameDetails = ({ loading }) => {
     };
 
     fetchDetails();
-  }, [id]);
+  }, [id, setBackgroundImage]);
 
   if (!gameDetails && !loading) {
     return (
@@ -44,7 +47,6 @@ const GameDetails = ({ loading }) => {
     cheapestDealID,
     description,
     description_raw,
-    developers,
     esrb_rating,
     genres,
     metacritic,
@@ -54,12 +56,12 @@ const GameDetails = ({ loading }) => {
     released,
     reviews,
     screenshots,
-    tags,
     trailers,
   } = gameDetails;
   const cheapSharkDealURL = `https://www.cheapshark.com/redirect?dealID=${cheapestDealID}`;
 
   const { rating, ratingClass } = getRating(metacritic);
+
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -110,19 +112,15 @@ const GameDetails = ({ loading }) => {
             ))}
           </div>
 
-          {/* USE FOR NEW DIV  */}
-          {/* <span>Metacritic Score: {metacritic}</span>
-            <span>Playtime: {playtime} hours</span>
-            <span>Rating: {rating}</span> */}
 
-          <div className="game-details__price-container">
-            <button className="game-list__button">
+          <div className="game-details__price-container"> 
+            <button className="game-list__button" disabled={!cheapest}>
               <Link
-                to={cheapSharkDealURL}
+                to={!cheapest ? '#' : cheapSharkDealURL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <h3>Buy Now for: ${cheapest}</h3>
+                <h3>{cheapest ? `Buy Now for: $${cheapest}` : 'No offers available...'}</h3>
               </Link>
             </button>
           </div>
@@ -138,6 +136,7 @@ const GameDetails = ({ loading }) => {
         </article>
       </section>
 
+    {trailers && reviews && ( 
       <section className="game-details__videos-container">
         <div className="game-details__tabs-container">
           {activeTab === "trailer" && trailers ? (
@@ -160,9 +159,9 @@ const GameDetails = ({ loading }) => {
             </div>
           )}
         </div>
-
+        
         <div className="game-details__video-container">
-          {activeTab === "trailer" && trailers && (
+          {activeTab === "trailer" && trailers && trailers.id && (
             <>
               <YouTubeVideo
                 key={trailers.videoId}
@@ -173,12 +172,13 @@ const GameDetails = ({ loading }) => {
                   className="game-list__button"
                   onClick={() => handleTabClick("review")}
                 >
-                  Done watching? Watch a Review next!
+                  Done watching? <br/>
+                   Watch a Review next!
                 </button>
               </div>
             </>
           )}
-          {activeTab === "review" && reviews && (
+          {activeTab === "review" && reviews && reviews.id && (
             <>
               <YouTubeVideo
                 key={reviews.videoId}
@@ -189,13 +189,16 @@ const GameDetails = ({ loading }) => {
                   className="game-list__button"
                   onClick={() => handleTabClick("trailer")}
                 >
-                  Done watching? Watch a Trailer next!
+                  Done watching? <br/>
+                   Watch a Trailer next!
                 </button>
               </div>
             </>
           )}
         </div>
       </section>
+        )}
+
 
       <section className="game-details__screenshots-container">
         <h3 className="mt-0">Screenshots</h3>

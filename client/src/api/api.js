@@ -27,8 +27,8 @@ export const fetchGameDetails = async (gameID) => {
     const cheapSharkResponse = await axios.get(`${gameApiURL}/api/deals?title=${gameDetails.name}`);
     const deals = cheapSharkResponse.data;
 
-    gameDetails.cheapest = deals[0].cheapest;
-    gameDetails.cheapestDealID = deals[0].cheapestDealID;
+    gameDetails.cheapest = deals[0]?.cheapest || null;
+    gameDetails.cheapestDealID = deals[0]?.cheapestDealID || null;
 
     // Fetch trailers
     const trailersResponse = await fetchGameTrailer(gameDetails.name);
@@ -40,7 +40,7 @@ export const fetchGameDetails = async (gameID) => {
 
     // Fetch screenshots
     const screenshotsResponse = await fetchGameScreenshots(gameID);
-    gameDetails.screenshots = screenshotsResponse;
+    gameDetails.screenshots = screenshotsResponse || [];
 
     return gameDetails;
   } catch (error) {

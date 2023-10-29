@@ -64,6 +64,11 @@ body {
     font-weight: $font-weight-regular;
     font-style: $font-style;
   }
+
+  button[disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 .main-app__container {

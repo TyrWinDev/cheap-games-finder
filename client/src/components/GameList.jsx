@@ -88,7 +88,7 @@ const GameList = ({
                     </div>
                   </div>
                   <div className="game-list__platforms">
-                    {game.platforms.map((platform) => (
+                    {game.platforms?.map((platform) => (
                       <span
                         className="game-list__platform"
                         key={platform.platform.id}
@@ -141,7 +141,7 @@ const GameList = ({
                       <Link to={`/game/${game.id}`} target="_blank">
                         <h3>
                           {!game.cheapest
-                            ? "No offers available..."
+                            ? "Unavailable..."
                             : `Get this game for $${game.cheapest}`}
                         </h3>
                         {/* <span id="game-list__price">{`Cheapest Price: ${

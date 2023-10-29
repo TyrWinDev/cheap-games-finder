@@ -7,13 +7,12 @@
 
   input {
     flex: 1;
-    height: 2.5rem;
+    height: 1rem;
     border: none;
-    border-radius: 10px;
-    background: transparent;
+    border-radius: 10px 0px 0px 10px;
     font-family: 'Roboto';
     font-size: 1.3rem;
-    color: #FFF;
+    color: $game-container-bg-color;
     padding: 0.5rem;
 
     &:focus {
@@ -24,19 +23,19 @@
 
   button {
     width: 6rem;
-    height: 2.5rem;
+    height: 2.05rem;
     border-radius: 0 10px 10px 0;
     border: none;
     font-family: 'Roboto';
     font-size: 1.3rem;
     font-weight: 500;
     cursor: pointer;
-    background: $primary-background-color;
-    color: $primary-text-color;
+    background: $game-container-bg-color;
+    color:  $primary-text-color;
 
     &:hover {
       background: $primary-text-color;
-      color: $primary-background-color;
+      color:   $game-container-bg-color;
       transition: 0.2s ease-in-out;
     }
   }

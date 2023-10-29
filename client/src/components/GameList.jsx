@@ -1,23 +1,63 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { TailSpin } from "react-loader-spinner";
-import { AiOutlineClockCircle, AiFillStar } from "react-icons/ai";
 import { getRating, filteredGames } from "../utils/utils.js";
+import SearchBar from "./SearchBar";
 
 import "../styles/gameList.scss";
 import "../styles/app.scss";
 
-const GameList = ({ games, loading }) => {
-  const sortedGames = filteredGames(games);
+const GameList = ({
+  loading,
+  gameList,
+  setGameList,
+  handleSearch,
+  searchQuery,
+}) => {
+  const sortedGames = filteredGames(gameList);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
+  const loadingText = () => {
+    if (loading) {
+      return <h1>Searching for deals...</h1>;
+    } else if (gameList.length > 0) {
+      return <h1>Showing game results for: {searchQuery}</h1>;
+    } else if (gameList.length === 0 && !loading) {
+      return <h1>Cheap Game Deals</h1>;
+    } else {
+      return "";
+    }
+  };
 
   return (
-    <div>
+    <div className="game-list__main-container">
+      {loadingText()}
+      <div className="game-list__header">
+            {isHomePage && gameList.length === 0 && !loading && (
+              <>
+                <SearchBar handleSearch={handleSearch} />
+              </>
+            )}
+
+            {gameList.length > 0 && (
+              <button
+                className="main-app__clear-btn"
+                onClick={() => setGameList([])}
+              >
+                {" "}
+                Clear Results{" "}
+              </button>
+          )}
+          </div>
+      
       {loading ? (
         <div className="loader-container">
           <TailSpin color="#00BFFF" height={80} width={80} />
         </div>
       ) : (
         <div className="game-list__container">
+ 
           {sortedGames.map((game) => {
             const { metacritic } = game;
             const { rating, ratingClass } = getRating(metacritic);

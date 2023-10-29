@@ -72,8 +72,27 @@ body {
   justify-content: center;
   align-items: center;
 
-  margin: 1rem;
+  margin: 4rem 1rem;
   padding: 1rem;
+}
+
+#wip-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 1rem;
+
+  span {
+    color: $primary-text-color
+  }
+
+  a {
+    color: $button-bg-color;
+    font-weight: 600;
+    text-decoration: none;
+  }
 }
 
 .mt-0 {

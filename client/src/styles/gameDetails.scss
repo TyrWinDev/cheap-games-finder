@@ -22,10 +22,33 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 
+.game-details__title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+
+  em {
+    color: $primary-background-color;
+    background-color: $primary-text-color;
+    padding: 0.3rem;
+    border-radius: 18px;
+  }
+}
+
 .game-details__image {
   width: 250px;
   height: 250px;
 }
+
+.game-list__rating-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 
 .game-list__button {
   border-radius: 30px;
@@ -140,6 +163,7 @@
 
     .game-details__title-container {
       text-align: center;
+      flex-direction: column;
 
       h2 {
         margin: $title-mb;

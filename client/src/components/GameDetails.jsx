@@ -31,7 +31,7 @@ const GameDetails = ({ loading }) => {
   if (!gameDetails && !loading) {
     return (
       <div>
-        <h2>ERROR 404. Game has no details available...</h2>
+        <h2>Loading game details...</h2>
         <Link to={`/`}>Go Back...</Link>
       </div>
     );
@@ -81,6 +81,7 @@ const GameDetails = ({ loading }) => {
         <section className="game-details__details-container">
           <div className="game-details__title-container">
             <h2>{name}</h2>
+            <em>Avg. Playtime: {playtime} hours</em>
           </div>
           <div className={`game-list__rating-container`}>
             <span className={`game-list__rating ${ratingClass}`}>
@@ -136,10 +137,6 @@ const GameDetails = ({ loading }) => {
           <p>{description_raw !== "" ? description_raw : description}</p>
         </article>
       </section>
-
-      {/* <div className="game-details__tags-container">
-        <span>Tags: {tags?.map((tag) => tag.name).join(", ")}</span>
-      </div> */}
 
       <section className="game-details__videos-container">
         <div className="game-details__tabs-container">

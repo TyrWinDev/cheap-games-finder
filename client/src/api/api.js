@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const gameApiURL = 'http://localhost:3001'; // Update this with the correct endpoint
+export const gameApiURL = 'http://localhost:3001';
 
 // Function to fetch video game data
 export const fetchVideoGame = async (searchQuery) => {

@@ -3,7 +3,6 @@ import { fetchVideoGame } from "./api/api";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import SearchBar from "./components/SearchBar";
 import GameList from "./components/GameList";
 import GameDetails from "./components/GameDetails";
 import TrendingGames from "./components/TrendingGames";
@@ -20,13 +19,11 @@ const App = () => {
 
   const handleSearch = async (searchQuery) => {
     try {
-      setLoading(true); //Sets loading to true while the petition is being handled.
-      setSearchQuery(searchQuery); //Sets the search query to the one that was passed as an argument.
+      setLoading(true); 
+      setSearchQuery(searchQuery); 
 
-      // Search for the game using the search query
       const gameData = await fetchVideoGame(searchQuery);
       if (gameData) {
-        // Search for the price using the game name
         const cheapSharkResponse = await axios.get(
           `${gameApiURL}/api/deals?title=${searchQuery}`
         );
@@ -63,7 +60,7 @@ const App = () => {
 
         setGameList(gameData);
       }
-      setLoading(false); //Sets loading to false when the petition is done.
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.error("Error fetching video game data:", error);
@@ -75,26 +72,16 @@ const App = () => {
   return (
     <Router>
       <div>
-      <Navbar handleSearch={handleSearch}/>
+      {/* <Navbar handleSearch={handleSearch}/> */}
       <div className="main-app__container">
-        <h1 className="page-title">{gameList.length > 0 ? `Showing game results for: ${searchQuery}` : `Video Game Deals`}</h1>
-
-        {gameList.length === 0 && !loading && (
-          <>
-          <span className="page-subtitle">(Never pay full price again...)</span>
-
-            <SearchBar handleSearch={handleSearch}/>
-          </>
-        )}
-
-        {gameList.length > 0 && (
-           <button className="main-app__clear-btn" onClick={() => setGameList([])}> Clear Results </button>
-        )}
         <Routes>
-         <Route path="/" element={<GameList games={gameList} loading={loading} />} />
+         <Route path="/" element={<GameList loading={loading} gameList={gameList} setGameList={setGameList} handleSearch={handleSearch} searchQuery={searchQuery} />} />
           {/* <Route path='/trending-deals' element={<TrendingGames />} /> */}
           <Route path="/game/:id" element={<GameDetails loading={loading} />} />
         </Routes>
+      </div>
+      <div id="wip-footer">
+      <span>This app is still a WIP. Created by: <a href="https://tyrwindev.github.io/digital-resume-v2.github.io/" target="_blank">@tyrwindev</a></span>
       </div>
       </div>
 

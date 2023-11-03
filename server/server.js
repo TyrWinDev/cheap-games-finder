@@ -1,20 +1,21 @@
 const express = require('express');
 const axios = require('axios');
 const dotenv = require('dotenv');
+const cors = require('cors');
+
 
 const app = express();
-const port = 3001;
+const port = 3000;
 dotenv.config();
 
 const RAWG_API_KEY = `${process.env.REACT_APP_RAWG_API_KEY}`; 
 const YT_API = `${process.env.REACT_APP_YT_API}`;
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+app.use(cors({
+  origin: '*', 
+  methods: 'GET, POST, OPTIONS',
+  allowedHeaders: 'Content-Type',
+}));
 
 // RAWG API
 

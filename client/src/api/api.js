@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const gameApiURL = 'http://localhost:3001';
+export const gameApiURL = process.env.REACT_APP_API_URL;
 
 // Function to fetch video game data
 export const fetchVideoGame = async (searchQuery) => {

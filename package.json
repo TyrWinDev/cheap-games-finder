@@ -1,0 +1,25 @@
+{
+    "name": "cheap-games-finder",
+    "version": "1.0.0",
+    "description": "Your project description here",
+    "scripts": {
+      "client-install": "cd client && npm install", 
+      "client": "cd client && npm start", 
+      "client-build": "cd client && npm run build",
+      "server": "node server/index.js", 
+      "server-start": "nodemon server/index.js", 
+      "dev": "concurrently \"npm run client\" \"npm run server-start\"", 
+      "heroku-postbuild": "cd client && npm install && npm run build" 
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/TyrWinDev/cheap-games-finder.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/TyrWinDev/cheap-games-finder/issues"
+    },
+    "homepage": "https://github.com/TyrWinDev/cheap-games-finder#readme"
+  }
+  
